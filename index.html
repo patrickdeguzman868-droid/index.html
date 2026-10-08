@@ -1,0 +1,3271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OSI // Build The Word</title>
+
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    font-family:"Press Start 2P",monospace;
+    color:#30265c;
+
+    background:
+        radial-gradient(circle at 15% 15%,#ffffff 0%,transparent 28%),
+        radial-gradient(circle at 85% 20%,#dff7ff 0%,transparent 30%),
+        radial-gradient(circle at 20% 85%,#f1ddff 0%,transparent 32%),
+        radial-gradient(circle at 85% 85%,#ffe1f4 0%,transparent 30%),
+        linear-gradient(135deg,#f9fbff,#eef5ff,#f8edff);
+}
+
+/* =====================================================
+   MAGICAL BACKGROUND
+===================================================== */
+
+.magic-bg{
+    position:fixed;
+    inset:0;
+
+    overflow:hidden;
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+
+    color:white;
+    font-size:18px;
+
+    animation:twinkle 2.5s infinite alternate;
+
+    text-shadow:0 0 10px white;
+}
+
+.star:nth-child(1){
+    left:8%;
+    top:12%;
+    animation-delay:.3s;
+}
+
+.star:nth-child(2){
+    left:25%;
+    top:75%;
+    animation-delay:1s;
+}
+
+.star:nth-child(3){
+    left:48%;
+    top:10%;
+    animation-delay:1.5s;
+}
+
+.star:nth-child(4){
+    left:72%;
+    top:30%;
+    animation-delay:.7s;
+}
+
+.star:nth-child(5){
+    left:91%;
+    top:72%;
+    animation-delay:1.8s;
+}
+
+.star:nth-child(6){
+    left:55%;
+    top:88%;
+    animation-delay:.2s;
+}
+
+.star:nth-child(7){
+    left:15%;
+    top:45%;
+    animation-delay:1.2s;
+}
+
+.star:nth-child(8){
+    left:82%;
+    top:8%;
+    animation-delay:2s;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.25;
+        transform:scale(.7) rotate(0deg);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.3) rotate(25deg);
+    }
+
+}
+
+.orb{
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    filter:blur(30px);
+
+    opacity:.45;
+
+    animation:floatOrb 9s ease-in-out infinite alternate;
+}
+
+.orb.one{
+    background:#9de8ff;
+
+    left:-50px;
+    top:20%;
+}
+
+.orb.two{
+    background:#d7a5ff;
+
+    right:-50px;
+    top:45%;
+
+    animation-delay:2s;
+}
+
+.orb.three{
+    background:#ffb5d9;
+
+    left:40%;
+    bottom:-70px;
+
+    animation-delay:4s;
+}
+
+@keyframes floatOrb{
+
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(40px,-35px);
+    }
+
+}
+
+/* =====================================================
+   PAGE SYSTEM
+===================================================== */
+
+.page{
+    position:relative;
+
+    z-index:1;
+
+    min-height:100vh;
+    width:100%;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:30px 18px;
+
+    opacity:0;
+
+    transform:scale(.97) translateY(15px);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.page.active{
+    display:flex;
+
+    opacity:1;
+
+    transform:scale(1) translateY(0);
+}
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.card{
+    width:min(1000px,95vw);
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:32px;
+
+    padding:40px;
+
+    box-shadow:
+        0 25px 70px rgba(82,63,135,.16),
+        inset 0 0 30px rgba(255,255,255,.8);
+
+    border:3px solid transparent;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.9),
+            rgba(255,255,255,.9)
+        ),
+        linear-gradient(
+            120deg,
+            #72d9ff,
+            #b58cff,
+            #ff9fd2,
+            #ffd66b
+        );
+
+    background-origin:border-box;
+
+    background-clip:
+        padding-box,
+        border-box;
+
+    animation:cardAppear .7s ease;
+}
+
+@keyframes cardAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+/* =====================================================
+   TITLES
+===================================================== */
+
+.small-title{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:30px;
+
+    text-align:center;
+
+    color:#7960c9;
+
+    margin-bottom:8px;
+}
+
+.main-title{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:70px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #48bde8,
+            #8f6be8,
+            #e36bb1
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    margin-bottom:12px;
+}
+
+.subtitle{
+    text-align:center;
+
+    font-size:13px;
+
+    color:#756c91;
+
+    line-height:1.8;
+}
+
+/* =====================================================
+   MAGIC LINE
+===================================================== */
+
+.magic-line{
+    height:5px;
+
+    margin:28px auto;
+
+    width:75%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #62cfff,
+            #9e7cff,
+            #ff91c8,
+            #ffd76b,
+            transparent
+        );
+
+    border-radius:50px;
+
+    box-shadow:
+        0 0 15px rgba(133,103,255,.45);
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.magic-button{
+    border:none;
+
+    border-radius:18px;
+
+    padding:20px 30px;
+
+    font-family:"Press Start 2P",monospace;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5ecdf2,
+            #8c72ed,
+            #dc72b7
+        );
+
+    box-shadow:
+        0 12px 25px rgba(111,96,190,.25);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+}
+
+.magic-button:hover{
+    transform:translateY(-5px) scale(1.03);
+
+    box-shadow:
+        0 18px 35px rgba(111,96,190,.35);
+
+    filter:brightness(1.08);
+}
+
+.magic-button:active{
+    transform:scale(.96);
+}
+
+/* =====================================================
+   START PAGE
+===================================================== */
+
+.start-content{
+    text-align:center;
+}
+
+.quest-symbol{
+    font-size:32px;
+
+    color:#ffbd55;
+
+    text-shadow:
+        0 0 15px #ffd77b;
+
+    margin-bottom:12px;
+}
+
+.start-button{
+    margin-top:35px;
+}
+
+/* =====================================================
+   RULES
+===================================================== */
+
+.rules-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:16px;
+
+    margin-top:25px;
+}
+
+.rule{
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(224,248,255,.9),
+            rgba(246,234,255,.9)
+        );
+
+    border:
+        2px solid rgba(140,115,220,.16);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.rule:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 25px rgba(100,80,150,.12);
+}
+
+.rule-icon{
+    font-size:25px;
+
+    margin-bottom:12px;
+}
+
+.rule-text{
+    font-size:11px;
+
+    line-height:1.8;
+
+    color:#645c80;
+}
+
+.begin-button{
+    display:block;
+
+    margin:30px auto 0;
+}
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game-card{
+    max-width:1100px;
+}
+
+.game-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    font-size:11px;
+}
+
+.round-label{
+    color:#806cc2;
+}
+
+.score-label{
+    color:#dc73a8;
+}
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question-box{
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(232,249,255,.95),
+            rgba(248,239,255,.95)
+        );
+
+    border:
+        2px solid rgba(127,111,220,.18);
+
+    text-align:center;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+}
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+.timer-box{
+    width:100%;
+
+    height:15px;
+
+    background:#e7e2f4;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:22px;
+}
+
+.timer-bar{
+    width:100%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #57cef1,
+            #8d74ec,
+            #ed76ae
+        );
+
+    border-radius:20px;
+
+    transition:
+        width 1s linear;
+}
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+.answer-area{
+    text-align:center;
+
+    margin-bottom:22px;
+}
+
+.today-label{
+    font-size:11px;
+
+    color:#887bb0;
+
+    margin-bottom:14px;
+}
+
+.answer-slots{
+    min-height:65px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:9px;
+
+    flex-wrap:wrap;
+
+    padding:12px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.7);
+
+    border:
+        2px dashed #b9a9df;
+}
+
+.answer-letter{
+    width:55px;
+
+    height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #f3edff
+        );
+
+    border:
+        2px solid #a99ade;
+
+    font-size:20px;
+
+    color:#62539c;
+
+    animation:letterPop .25s ease;
+}
+
+.locked-letter{
+    background:
+        linear-gradient(
+            135deg,
+            #d9f6ff,
+            #e9ddff
+        );
+
+    border-color:#79cce9;
+
+    color:#4b8da7;
+
+    box-shadow:
+        0 0 14px rgba(87,204,240,.25);
+}
+
+@keyframes letterPop{
+
+    from{
+        transform:scale(.7);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+.keyboard{
+    display:grid;
+
+    grid-template-columns:
+        repeat(8,minmax(45px,1fr));
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.key{
+    min-height:58px;
+
+    border:none;
+
+    border-radius:15px;
+
+    font-family:"Press Start 2P",monospace;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    color:#51467e;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f0eaff
+        );
+
+    border:
+        2px solid #d0c6ec;
+
+    box-shadow:
+        0 6px 12px rgba(87,70,130,.09);
+
+    transition:
+        transform .15s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.key:hover{
+    transform:translateY(-3px);
+
+    background:#fff;
+
+    box-shadow:
+        0 10px 20px rgba(87,70,130,.15);
+}
+
+.key:active{
+    transform:scale(.92);
+}
+
+.key.used{
+    opacity:.35;
+
+    cursor:not-allowed;
+}
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.controls{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-top:25px;
+}
+
+.control-button{
+    flex:1;
+
+    padding:17px;
+
+    border-radius:16px;
+
+    border:
+        2px solid #c8bde5;
+
+    background:white;
+
+    font-family:"Press Start 2P",monospace;
+
+    font-size:11px;
+
+    cursor:pointer;
+
+    color:#625789;
+
+    transition:.2s ease;
+}
+
+.control-button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 8px 18px rgba(91,72,130,.12);
+}
+
+.check-button{
+    background:
+        linear-gradient(
+            135deg,
+            #62cef0,
+            #8f77ea
+        );
+
+    color:white;
+
+    border:none;
+}
+
+/* =====================================================
+   WRONG / TIME'S UP OVERLAY
+===================================================== */
+
+.event-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:20;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(242,239,255,.88);
+
+    backdrop-filter:blur(15px);
+
+    opacity:0;
+
+    transition:opacity .35s ease;
+}
+
+.event-overlay.show{
+    display:flex;
+
+    opacity:1;
+}
+
+.event-card{
+    width:min(900px,94vw);
+
+    height:700px;
+
+    display:grid;
+
+    grid-template-rows:
+        45px
+        70px
+        30px
+        150px
+        30px
+        190px
+        35px
+        80px;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.98),
+            rgba(239,249,255,.98),
+            rgba(249,238,255,.98)
+        );
+
+    border:
+        3px solid #d0c1ec;
+
+    box-shadow:
+        0 30px 80px rgba(75,60,130,.25);
+
+    animation:eventPop .45s ease;
+}
+
+@keyframes eventPop{
+
+    from{
+        transform:scale(.85) translateY(30px);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1) translateY(0);
+        opacity:1;
+    }
+
+}
+
+/* EVENT TYPE */
+
+.event-type{
+    font-family:"Press Start 2P",monospace;
+
+    font-size:17px;
+
+    color:#d45f99;
+
+    letter-spacing:2px;
+}
+
+/* EVENT TITLE */
+
+.event-title{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:58px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #5bc9ec,
+            #8c6ee9,
+            #df6ea9
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+/* TODAY'S WORD */
+
+.event-today{
+    font-size:12px;
+
+    color:#9185b2;
+
+    letter-spacing:2px;
+}
+
+/* EVENT WORD */
+
+.event-word{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-height:150px;
+
+    overflow:hidden;
+}
+
+.event-letter{
+    width:60px;
+
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7fcff,
+            #f1eaff
+        );
+
+    border:
+        2px solid #c4b6e4;
+
+    font-size:21px;
+
+    color:#65599a;
+}
+
+.event-letter.locked-letter{
+    background:
+        linear-gradient(
+            135deg,
+            #d9f6ff,
+            #e9ddff
+        );
+
+    border-color:#79cce9;
+
+    color:#4b8da7;
+
+    box-shadow:
+        0 0 16px rgba(87,204,240,.25);
+}
+
+/* HUGOT LABEL */
+
+.event-subtitle{
+    font-size:11px;
+
+    color:#9185b2;
+
+    letter-spacing:2px;
+}
+
+/* =====================================================
+   BIG HUGOT
+===================================================== */
+
+.hugot{
+    height:190px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    padding:0 25px;
+
+    font-family:"MedievalSharp",cursive;
+
+    font-size:38px;
+
+    font-weight:600;
+
+    line-height:1.35;
+
+    color:#51466f;
+
+    text-align:center;
+
+    text-shadow:
+        0 2px 0 rgba(255,255,255,.9);
+
+    animation:hugotAppear .6s ease;
+}
+
+@keyframes hugotAppear{
+
+    from{
+        opacity:0;
+
+        transform:
+            scale(.85)
+            translateY(15px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+/* =====================================================
+   CLUE REVEAL
+===================================================== */
+
+.reveal-letter{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:65px;
+
+    color:#8066d6;
+
+    text-shadow:
+        0 0 20px rgba(128,102,214,.3);
+
+    animation:reveal .6s ease;
+}
+
+@keyframes reveal{
+
+    0%{
+        transform:
+            scale(.3)
+            rotate(-15deg);
+
+        opacity:0;
+    }
+
+    60%{
+        transform:
+            scale(1.2)
+            rotate(5deg);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+/* =====================================================
+   CORRECT PAUSE SCREEN
+===================================================== */
+
+.correct-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:30;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(239,255,247,.95);
+
+    backdrop-filter:blur(15px);
+
+    opacity:0;
+}
+
+.correct-overlay.show{
+    display:flex;
+
+    opacity:1;
+
+    animation:correctScreen .4s ease;
+}
+
+.correct-card{
+    width:min(720px,92vw);
+
+    min-height:480px;
+
+    padding:50px 35px;
+
+    border-radius:32px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #efffff,
+            #f5edff
+        );
+
+    border:
+        3px solid #b8e8d2;
+
+    box-shadow:
+        0 30px 80px rgba(71,155,116,.18);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    animation:correctCard .65s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes correctScreen{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+@keyframes correctCard{
+
+    0%{
+        transform:
+            scale(.65)
+            translateY(40px);
+
+        opacity:0;
+    }
+
+    70%{
+        transform:
+            scale(1.05)
+            translateY(-5px);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+.correct-symbol{
+    font-size:45px;
+
+    color:#55c995;
+
+    margin-bottom:15px;
+
+    animation:starSpin 1.2s ease;
+}
+
+@keyframes starSpin{
+
+    from{
+        transform:
+            rotate(-20deg)
+            scale(.4);
+    }
+
+    to{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+
+}
+
+.correct-main{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:78px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #42bb87,
+            #61c9e8,
+            #8d72e7
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    margin-bottom:25px;
+}
+
+.correct-message{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:34px;
+
+    line-height:1.4;
+
+    color:#675b83;
+
+    max-width:620px;
+
+    margin-bottom:35px;
+
+    animation:
+        messageAppear
+        .7s ease .2s both;
+}
+
+@keyframes messageAppear{
+
+    from{
+        opacity:0;
+
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+.next-button{
+    padding:19px 30px;
+
+    font-size:12px;
+
+    animation:
+        buttonAppear
+        .7s ease .35s both;
+}
+
+@keyframes buttonAppear{
+
+    from{
+        opacity:0;
+
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+/* =====================================================
+   FINAL PAGE
+===================================================== */
+
+.final-card{
+    text-align:center;
+}
+
+.final-title{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:65px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #56c9ee,
+            #906ee8,
+            #e36ba9
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+.final-score{
+    font-family:"MedievalSharp",cursive;
+
+    font-size:85px;
+
+    color:#765ed0;
+
+    margin:25px 0;
+}
+
+.final-message{
+    font-size:13px;
+
+    line-height:2;
+
+    color:#746b91;
+}
+
+/* =====================================================
+   CLICK SPARKLES
+===================================================== */
+
+.spark{
+    position:fixed;
+
+    pointer-events:none;
+
+    font-size:15px;
+
+    z-index:100;
+
+    animation:spark .8s ease forwards;
+}
+
+@keyframes spark{
+
+    from{
+        opacity:1;
+
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to{
+        opacity:0;
+
+        transform:
+            translate(
+                calc((var(--x) - .5) * 150px),
+                calc((var(--y) - .5) * 150px)
+            )
+            scale(.2);
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:750px){
+
+    .main-title{
+        font-size:48px;
+    }
+
+    .card{
+        padding:25px 18px;
+    }
+
+    .rules-grid{
+        grid-template-columns:1fr;
+    }
+
+    .keyboard{
+        grid-template-columns:
+            repeat(6,minmax(40px,1fr));
+    }
+
+    .key{
+        min-height:50px;
+
+        font-size:12px;
+    }
+
+    .event-card{
+        width:94vw;
+
+        height:620px;
+
+        padding:25px 18px;
+
+        grid-template-rows:
+            35px
+            55px
+            20px
+            105px
+            20px
+            150px
+            30px
+            80px;
+    }
+
+    .event-title{
+        font-size:42px;
+    }
+
+    .event-word{
+        min-height:105px;
+    }
+
+    .event-letter{
+        width:42px;
+        height:42px;
+
+        font-size:15px;
+    }
+
+    .hugot{
+        height:150px;
+
+        font-size:27px;
+
+        padding:0 10px;
+    }
+
+    .reveal-letter{
+        font-size:55px;
+    }
+
+    .correct-card{
+        min-height:420px;
+
+        padding:35px 20px;
+    }
+
+    .correct-main{
+        font-size:55px;
+    }
+
+    .correct-message{
+        font-size:26px;
+    }
+
+    .final-title{
+        font-size:48px;
+    }
+
+    .final-score{
+        font-size:65px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="magic-bg">
+
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+    <div class="star">✦</div>
+    <div class="star">✧</div>
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+
+</div>
+
+
+<!-- =====================================================
+     START
+===================================================== -->
+
+<section
+    id="startPage"
+    class="page active">
+
+    <div class="card start-content">
+
+        <div class="quest-symbol">
+            ✦ ✧ ✦
+        </div>
+
+        <div class="small-title">
+            THE NETWORK QUEST
+        </div>
+
+        <div class="main-title">
+            BUILD THE WORD
+        </div>
+
+        <div class="subtitle">
+            OSI MODEL CHALLENGE
+            <br>
+            Build the correct answer before time runs out.
+        </div>
+
+        <div class="magic-line"></div>
+
+        <button
+            class="magic-button start-button"
+            onclick="showRules()">
+
+            START QUEST
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RULES
+===================================================== -->
+
+<section
+    id="rulesPage"
+    class="page">
+
+    <div class="card">
+
+        <div class="small-title">
+            ✦ QUEST RULES ✦
+        </div>
+
+        <div class="magic-line"></div>
+
+
+        <div class="rules-grid">
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    ⏳
+                </div>
+
+                <div class="rule-text">
+                    You have 10 seconds for every question.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    🔤
+                </div>
+
+                <div class="rule-text">
+                    Build the correct word using the letters.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    ❌
+                </div>
+
+                <div class="rule-text">
+                    Wrong answer = repeat the ice breaker, then try the same question again.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    ⌛
+                </div>
+
+                <div class="rule-text">
+                    Time's up = repeat the ice breaker, then try the same question again.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    💡
+                </div>
+
+                <div class="rule-text">
+                    Every mistake reveals one clue letter.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    🔒
+                </div>
+
+                <div class="rule-text">
+                    Revealed letters stay locked and cannot be changed.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    ⭐
+                </div>
+
+                <div class="rule-text">
+                    Correct answer = pause for the audience moment, then continue to the next round.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-icon">
+                    🏆
+                </div>
+
+                <div class="rule-text">
+                    Starting score is 100. Every clue costs 15 points. Minimum score is 40.
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="magic-button begin-button"
+            onclick="beginQuest()">
+
+            ✦ BEGIN QUEST ✦
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GAME
+===================================================== -->
+
+<section
+    id="gamePage"
+    class="page">
+
+    <div class="card game-card">
+
+
+        <div class="game-top">
+
+            <div class="round-label">
+
+                ROUND
+                <span id="roundNumber">
+                    1
+                </span>
+                /7
+
+            </div>
+
+
+            <div class="score-label">
+
+                SCORE:
+                <span id="score">
+                    100
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="questionBox"
+            class="question-box">
+        </div>
+
+
+        <div class="timer-box">
+
+            <div
+                id="timerBar"
+                class="timer-bar">
+            </div>
+
+        </div>
+
+
+        <div class="answer-area">
+
+            <div class="today-label">
+                TODAY'S WORD
+            </div>
+
+
+            <div
+                id="answerSlots"
+                class="answer-slots">
+            </div>
+
+        </div>
+
+
+        <div
+            id="keyboard"
+            class="keyboard">
+        </div>
+
+
+        <div class="controls">
+
+
+            <button
+                class="control-button"
+                onclick="clearAnswer()">
+
+                CLEAR
+
+            </button>
+
+
+            <button
+                class="control-button check-button"
+                onclick="checkAnswer()">
+
+                CHECK
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WRONG / TIME'S UP
+===================================================== -->
+
+<div
+    id="eventOverlay"
+    class="event-overlay">
+
+    <div class="event-card">
+
+
+        <div
+            id="eventType"
+            class="event-type">
+
+            WRONG
+
+        </div>
+
+
+        <div
+            id="eventTitle"
+            class="event-title">
+
+            TRY AGAIN
+
+        </div>
+
+
+        <div class="event-today">
+
+            TODAY'S WORD
+
+        </div>
+
+
+        <div
+            id="eventWord"
+            class="event-word">
+
+        </div>
+
+
+        <div class="event-subtitle">
+
+            HUGOT
+
+        </div>
+
+
+        <div
+            id="hugotText"
+            class="hugot">
+
+        </div>
+
+
+        <div class="event-subtitle">
+
+            CLUE REVEAL
+
+        </div>
+
+
+        <div
+            style="display:flex;align-items:center;justify-content:center;gap:25px;">
+
+            <div
+                id="revealLetter"
+                class="reveal-letter">
+
+            </div>
+
+
+            <button
+                class="magic-button"
+                onclick="closeEvent()">
+
+                TRY AGAIN
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CORRECT PAUSE
+===================================================== -->
+
+<div
+    id="correctOverlay"
+    class="correct-overlay">
+
+
+    <div class="correct-card">
+
+
+        <div class="correct-symbol">
+            ✦ ✧ ✦
+        </div>
+
+
+        <div class="correct-main">
+            CORRECT!
+        </div>
+
+
+        <div class="correct-message">
+            Ready ka na bang umasa?
+        </div>
+
+
+        <button
+            class="magic-button next-button"
+            onclick="nextRound()">
+
+            ✦ NEXT ROUND ✦
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section
+    id="finalPage"
+    class="page">
+
+    <div class="card final-card">
+
+
+        <div class="quest-symbol">
+            ✦ ✧ ✦
+        </div>
+
+
+        <div class="final-title">
+            QUEST COMPLETE
+        </div>
+
+
+        <div class="magic-line"></div>
+
+
+        <div class="final-score">
+
+            <span id="finalScore">
+                100
+            </span>
+
+        </div>
+
+
+        <div class="final-message">
+
+            You completed the OSI Model challenge!
+
+            <br><br>
+
+            Great work, network adventurer.
+
+        </div>
+
+
+        <button
+            class="magic-button"
+            style="margin-top:30px"
+            onclick="location.reload()">
+
+            PLAY AGAIN
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+const questions = [
+
+    {
+        word:"OSI",
+
+        question:
+        "What conceptual framework is used to understand network communication?"
+    },
+
+    {
+        word:"APPLICATION",
+
+        question:
+        "Which is the 7th layer that provides network services used by applications?"
+    },
+
+    {
+        word:"PRESENTATION",
+
+        question:
+        "Which layer handles translation, encryption/decryption, and compression?"
+    },
+
+    {
+        word:"SESSION",
+
+        question:
+        "Which 5th layer manages communication sessions?"
+    },
+
+    {
+        word:"TRANSPORT",
+
+        question:
+        "Which 4th layer provides reliable delivery and flow control?"
+    },
+
+    {
+        word:"NETWORK",
+
+        question:
+        "Which layer handles logical addressing and routing?"
+    },
+
+    {
+        word:"PHYSICAL",
+
+        question:
+        "Which 1st layer transmits raw bits?"
+    }
+
+];
+
+
+/* =====================================================
+   HUGOT
+===================================================== */
+
+const hugotLines = [
+
+    "Binigay mo naman ang lahat… bakit hindi ka pa rin enough?",
+
+    "Ginawa mo naman ang lahat… bakit hindi sapat?",
+
+    "Akala mo tama na… akala mo lang pala.",
+
+    "Hindi lahat ng pinipilit, binabalikan. Move on na, teh…",
+
+    "One more chance… huwag na, masasaktan ka lang nang paulit-ulit.",
+
+    "Binigyan ka ng chance… sinayang mo pa.",
+
+    "May clue ka na… pero hindi mo pa rin maintindihan kung bakit hindi naging sapat.",
+
+    "Hindi naman kulang ang ginagawa mo… baka ayaw lang niya talaga sa’yo.",
+
+    "Maybe it’s time to stop forcing the answer.",
+
+    "Hindi ka naman sumuko… napagod ka lang kakasubok.",
+
+    "Minsan, hindi mo kailangan ng another chance… kailangan mo lang tanggapin.",
+
+    "Akala mo kailangan mo pang mag-effort… ayaw ka lang talaga niya.",
+
+    "May sagot naman… ayaw mo lang tanggapin.",
+
+    "Hindi lahat ng mali, kailangan pang ayusin.",
+
+    "Baka hindi mo kailangan ng clue… kailangan mo lang makita yung totoo."
+
+];
+
+
+/* =====================================================
+   GAME VARIABLES
+===================================================== */
+
+let currentRound = 0;
+
+let answer = [];
+
+let clueCount = 0;
+
+let score = 100;
+
+let timer = null;
+
+let timeLeft = 10;
+
+
+/*
+   Recent hugot history.
+
+   The hugot remains random,
+   but the latest 5 are temporarily
+   excluded from the random pool.
+*/
+
+let recentHugots = [];
+
+
+/* =====================================================
+   RANDOM HUGOT SYSTEM
+===================================================== */
+
+function getRandomHugot(){
+
+    const cooldown =
+        Math.min(
+            5,
+            hugotLines.length - 1
+        );
+
+
+    let availableHugots =
+        hugotLines.filter(
+            line =>
+                !recentHugots.includes(line)
+        );
+
+
+    /*
+       Safety fallback.
+    */
+
+    if(
+        availableHugots.length === 0
+    ){
+
+        availableHugots =
+            [...hugotLines];
+
+    }
+
+
+    /*
+       RANDOM PICK
+    */
+
+    const selected =
+        availableHugots[
+            Math.floor(
+                Math.random() *
+                availableHugots.length
+            )
+        ];
+
+
+    recentHugots.push(selected);
+
+
+    /*
+       Keep only the last 5.
+    */
+
+    if(
+        recentHugots.length >
+        cooldown
+    ){
+
+        recentHugots.shift();
+
+    }
+
+
+    return selected;
+
+}
+
+
+/* =====================================================
+   PAGE TRANSITION
+===================================================== */
+
+function showPage(id){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById(id)
+            .classList.add(
+                "active"
+            );
+
+    },100);
+
+}
+
+
+/* =====================================================
+   RULES
+===================================================== */
+
+function showRules(){
+
+    showPage(
+        "rulesPage"
+    );
+
+}
+
+
+/* =====================================================
+   BEGIN
+===================================================== */
+
+function beginQuest(){
+
+    currentRound = 0;
+
+    score = 100;
+
+    clueCount = 0;
+
+    answer = [];
+
+    recentHugots = [];
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        score;
+
+
+    showPage(
+        "gamePage"
+    );
+
+
+    setTimeout(() => {
+
+        loadRound();
+
+    },300);
+
+}
+
+
+/* =====================================================
+   LOAD ROUND
+===================================================== */
+
+function loadRound(){
+
+    clearInterval(timer);
+
+
+    const data =
+        questions[
+            currentRound
+        ];
+
+
+    clueCount = 0;
+
+    answer = [];
+
+
+    document
+        .getElementById(
+            "roundNumber"
+        )
+        .textContent =
+        currentRound + 1;
+
+
+    document
+        .getElementById(
+            "questionBox"
+        )
+        .textContent =
+        data.question;
+
+
+    renderAnswer();
+
+    renderKeyboard();
+
+    startTimer();
+
+}
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+function renderAnswer(){
+
+    const container =
+        document
+            .getElementById(
+                "answerSlots"
+            );
+
+
+    container.innerHTML = "";
+
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    for(
+        let i = 0;
+        i < word.length;
+        i++
+    ){
+
+        const slot =
+            document
+                .createElement(
+                    "div"
+                );
+
+
+        slot.className =
+            "answer-letter";
+
+
+        /*
+           LOCKED CLUE
+        */
+
+        if(
+            i < clueCount
+        ){
+
+            slot.classList.add(
+                "locked-letter"
+            );
+
+            slot.textContent =
+                word[i];
+
+        }
+
+
+        /*
+           USER LETTER
+        */
+
+        else if(
+            answer[
+                i - clueCount
+            ]
+        ){
+
+            slot.textContent =
+                answer[
+                    i - clueCount
+                ];
+
+        }
+
+
+        /*
+           EMPTY
+        */
+
+        else{
+
+            slot.textContent =
+                "";
+
+        }
+
+
+        container.appendChild(
+            slot
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const arr =
+        [...array];
+
+
+    for(
+        let i = arr.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            arr[i],
+            arr[j]
+        ] =
+        [
+            arr[j],
+            arr[i]
+        ];
+
+    }
+
+
+    return arr;
+
+}
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+function renderKeyboard(){
+
+    const keyboard =
+        document
+            .getElementById(
+                "keyboard"
+            );
+
+
+    keyboard.innerHTML = "";
+
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    /*
+       ONLY REMAINING LETTERS
+    */
+
+    const remainingLetters =
+        word
+            .slice(clueCount)
+            .split("");
+
+
+    const shuffledLetters =
+        shuffle(
+            remainingLetters
+        );
+
+
+    shuffledLetters.forEach(
+        (letter,index) => {
+
+            const key =
+                document
+                    .createElement(
+                        "button"
+                    );
+
+
+            key.className =
+                "key";
+
+
+            key.textContent =
+                letter;
+
+
+            key.dataset.index =
+                index;
+
+
+            key.onclick = () => {
+
+                addLetter(
+                    letter,
+                    key
+                );
+
+            };
+
+
+            keyboard.appendChild(
+                key
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ADD LETTER
+===================================================== */
+
+function addLetter(
+    letter,
+    key
+){
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    if(
+        answer.length >=
+        word.length - clueCount
+    ){
+
+        return;
+
+    }
+
+
+    answer.push(
+        letter
+    );
+
+
+    key.classList.add(
+        "used"
+    );
+
+
+    renderAnswer();
+
+}
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+function clearAnswer(){
+
+    answer = [];
+
+
+    document
+        .querySelectorAll(
+            ".key"
+        )
+        .forEach(
+            key => {
+
+                key.classList.remove(
+                    "used"
+                );
+
+            }
+        );
+
+
+    renderAnswer();
+
+}
+
+
+/* =====================================================
+   CHECK
+===================================================== */
+
+function checkAnswer(){
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    const revealed =
+        word.slice(
+            0,
+            clueCount
+        );
+
+
+    const builtWord =
+        revealed +
+        answer.join("");
+
+
+    if(
+        builtWord.toUpperCase() ===
+        word.toUpperCase()
+    ){
+
+        clearInterval(
+            timer
+        );
+
+
+        /*
+           DO NOT AUTO NEXT.
+
+           Show the special pause.
+        */
+
+        showCorrect();
+
+    }
+
+    else{
+
+        failure(
+            "WRONG"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startTimer(){
+
+    clearInterval(
+        timer
+    );
+
+
+    timeLeft = 10;
+
+
+    const bar =
+        document
+            .getElementById(
+                "timerBar"
+            );
+
+
+    bar.style.width =
+        "100%";
+
+
+    timer =
+        setInterval(
+            () => {
+
+                timeLeft--;
+
+
+                bar.style.width =
+                    (timeLeft / 10 * 100)
+                    + "%";
+
+
+                if(
+                    timeLeft <= 0
+                ){
+
+                    clearInterval(
+                        timer
+                    );
+
+
+                    failure(
+                        "TIME'S UP"
+                    );
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+/* =====================================================
+   FAILURE
+===================================================== */
+
+function failure(type){
+
+    clearInterval(
+        timer
+    );
+
+
+    /*
+       Reveal ONE MORE clue.
+    */
+
+    if(
+        clueCount <
+        questions[
+            currentRound
+        ].word.length
+    ){
+
+        clueCount++;
+
+
+        score =
+            Math.max(
+                40,
+                100 -
+                clueCount * 15
+            );
+
+
+        document
+            .getElementById(
+                "score"
+            )
+            .textContent =
+            score;
+
+    }
+
+
+    answer = [];
+
+
+    /*
+       RANDOM HUGOT
+    */
+
+    const randomHugot =
+        getRandomHugot();
+
+
+    document
+        .getElementById(
+            "eventType"
+        )
+        .textContent =
+        type;
+
+
+    document
+        .getElementById(
+            "eventTitle"
+        )
+        .textContent =
+        type === "WRONG"
+            ? "TRY AGAIN"
+            : "TIME'S UP";
+
+
+    document
+        .getElementById(
+            "hugotText"
+        )
+        .textContent =
+        randomHugot;
+
+
+    renderEventWord();
+
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    document
+        .getElementById(
+            "revealLetter"
+        )
+        .textContent =
+        word[
+            clueCount - 1
+        ];
+
+
+    document
+        .getElementById(
+            "eventOverlay"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   EVENT WORD
+===================================================== */
+
+function renderEventWord(){
+
+    const container =
+        document
+            .getElementById(
+                "eventWord"
+            );
+
+
+    container.innerHTML = "";
+
+
+    const word =
+        questions[
+            currentRound
+        ].word;
+
+
+    for(
+        let i = 0;
+        i < word.length;
+        i++
+    ){
+
+        const letter =
+            document
+                .createElement(
+                    "div"
+                );
+
+
+        letter.className =
+            "event-letter";
+
+
+        if(
+            i < clueCount
+        ){
+
+            letter.classList.add(
+                "locked-letter"
+            );
+
+            letter.textContent =
+                word[i];
+
+        }
+
+        else{
+
+            letter.textContent =
+                "?";
+
+        }
+
+
+        container.appendChild(
+            letter
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TRY AGAIN
+===================================================== */
+
+function closeEvent(){
+
+    document
+        .getElementById(
+            "eventOverlay"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    answer = [];
+
+
+    renderAnswer();
+
+    renderKeyboard();
+
+    startTimer();
+
+}
+
+
+/* =====================================================
+   CORRECT SCREEN
+===================================================== */
+
+function showCorrect(){
+
+    /*
+       The timer is already stopped.
+
+       The game waits here until the
+       presenter clicks NEXT ROUND.
+    */
+
+    document
+        .getElementById(
+            "correctOverlay"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   NEXT ROUND
+===================================================== */
+
+function nextRound(){
+
+    document
+        .getElementById(
+            "correctOverlay"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    currentRound++;
+
+
+    /*
+       GAME COMPLETE
+    */
+
+    if(
+        currentRound >=
+        questions.length
+    ){
+
+        endGame();
+
+        return;
+
+    }
+
+
+    /*
+       Small transition.
+    */
+
+    setTimeout(
+        () => {
+
+            loadRound();
+
+        },
+        350
+    );
+
+}
+
+
+/* =====================================================
+   END GAME
+===================================================== */
+
+function endGame(){
+
+    clearInterval(
+        timer
+    );
+
+
+    document
+        .getElementById(
+            "finalScore"
+        )
+        .textContent =
+        score;
+
+
+    showPage(
+        "finalPage"
+    );
+
+}
+
+
+/* =====================================================
+   KEYBOARD INPUT
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        /*
+           Only work while game page
+           is active.
+        */
+
+        if(
+            !document
+                .getElementById(
+                    "gamePage"
+                )
+                .classList
+                .contains(
+                    "active"
+                )
+        ){
+
+            return;
+
+        }
+
+
+        const key =
+            e.key.toUpperCase();
+
+
+        /*
+           LETTER
+        */
+
+        if(
+            /^[A-Z]$/.test(
+                key
+            )
+        ){
+
+            const buttons =
+                [
+                    ...
+                    document
+                        .querySelectorAll(
+                            ".key"
+                        )
+                ];
+
+
+            const available =
+                buttons.find(
+                    button =>
+                        button.textContent ===
+                        key &&
+                        !button.classList.contains(
+                            "used"
+                        )
+                );
+
+
+            if(
+                available
+            ){
+
+                addLetter(
+                    key,
+                    available
+                );
+
+            }
+
+        }
+
+
+        /*
+           BACKSPACE
+        */
+
+        if(
+            e.key ===
+            "Backspace"
+        ){
+
+            if(
+                answer.length > 0
+            ){
+
+                answer.pop();
+
+
+                const buttons =
+                    [
+                        ...
+                        document
+                            .querySelectorAll(
+                                ".key"
+                            )
+                    ];
+
+
+                const used =
+                    buttons.filter(
+                        button =>
+                            button.classList.contains(
+                                "used"
+                            )
+                    );
+
+
+                if(
+                    used.length > 0
+                ){
+
+                    used[
+                        used.length - 1
+                    ]
+                    .classList
+                    .remove(
+                        "used"
+                    );
+
+                }
+
+
+                renderAnswer();
+
+            }
+
+        }
+
+
+        /*
+           ENTER = CHECK
+        */
+
+        if(
+            e.key ===
+            "Enter"
+        ){
+
+            checkAnswer();
+
+        }
+
+
+        /*
+           ESC = CLEAR
+        */
+
+        if(
+            e.key ===
+            "Escape"
+        ){
+
+            clearAnswer();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CLICK SPARKLES
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        for(
+            let i = 0;
+            i < 5;
+            i++
+        ){
+
+            const spark =
+                document
+                    .createElement(
+                        "div"
+                    );
+
+
+            spark.className =
+                "spark";
+
+
+            spark.textContent =
+                [
+                    "✦",
+                    "✧",
+                    "⋆",
+                    "·"
+                ][
+                    Math.floor(
+                        Math.random() * 4
+                    )
+                ];
+
+
+            spark.style.left =
+                e.clientX + "px";
+
+
+            spark.style.top =
+                e.clientY + "px";
+
+
+            spark.style.setProperty(
+                "--x",
+                Math.random()
+            );
+
+
+            spark.style.setProperty(
+                "--y",
+                Math.random()
+            );
+
+
+            document.body.appendChild(
+                spark
+            );
+
+
+            setTimeout(
+                () => {
+
+                    spark.remove();
+
+                },
+                800
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
